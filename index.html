@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧪 화학 원소 주기율표 챌린지</title>
+    <title>🧪 화학 원소 주기율표 타이핑 챌린지</title>
     
     <!-- Firebase SDK (버전 9 호환 표준 CDN) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -30,7 +30,7 @@
         .screen.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* [요청 반영] 로그인(학번 입력) 화면 레이아웃 및 교사용 버튼 */
+        /* 로그인(학번 입력) 화면 레이아웃 및 교사용 버튼 */
         #login-screen { position: relative; max-width: 500px; text-align: center; }
         .admin-shortcut-btn {
             position: absolute; top: -40px; right: 20px;
@@ -50,21 +50,22 @@
         /* 대기실 가이드 영역 */
         .guide-box { background: #1e293b; border-left: 4px solid var(--primary); padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; font-size: 14px; line-height: 1.6; }
 
-        /* 게임진행 영역 */
+        /* 타이핑 게임진행 영역 */
         .game-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; text-align: center; position: relative; }
         .hud { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 14px; color: var(--text-muted); }
-        .question-display { font-size: 48px; font-weight: bold; margin: 30px 0; color: #fff; text-shadow: 0 0 10px rgba(99,102,241,0.3); }
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        .option-btn { background: #0f172a; border: 1px solid var(--border-color); padding: 16px; border-radius: 10px; color: white; font-size: 16px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
-        .option-btn:hover { background: var(--border-color); border-color: var(--text-muted); }
-        
+        .question-display { font-size: 56px; font-weight: bold; margin: 20px 0; color: #fff; text-shadow: 0 0 10px rgba(99,102,241,0.3); }
+        .input-group { margin: 20px 0; }
+        .typing-input { width: 80%; padding: 12px; font-size: 18px; border-radius: 8px; border: 1px solid var(--border-color); background: #0f172a; color: white; text-align: center; }
+        .typing-input:focus { border-color: var(--accent-green); outline: none; }
+        .submit-btn { padding: 12px 24px; font-size: 16px; background: var(--accent-green); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-left: 10px; }
+
         /* 설문조사 입력 폼 */
         .survey-group { text-align: left; margin-bottom: 20px; }
         .survey-group label { display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500; }
         .survey-group input, .survey-group textarea { width: 100%; padding: 12px; background: #0f172a; border: 1px solid var(--border-color); border-radius: 8px; color: white; font-size: 14px; }
         .survey-group textarea { resize: none; height: 80px; }
 
-        /* [스크린샷 반영] 교사용 통합 대시보드 모달 및 스타일 */
+        /* 교사용 통합 대시보드 모달 및 스타일 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
         .modal-overlay.active { display: flex; }
         .dashboard-container { background: #111827; width: 100%; max-width: 1000px; border-radius: 16px; border: 2px solid var(--accent-purple); padding: 25px; box-shadow: 0 0 30px rgba(168,85,247,0.2); position: relative; max-height: 90vh; overflow-y: auto; }
@@ -107,11 +108,11 @@
 
     <!-- 1. 로그인 / 대기 화면 -->
     <div id="login-screen" class="screen active">
-        <!-- [요청 반영] 언제든 비밀번호 입력 후 들어갈 수 있는 교사용 대시보드 핫링크 -->
+        <!-- 첫 화면 우측 상단 교사용 대시보드 바로가기 버튼 -->
         <button class="admin-shortcut-btn" onclick="askAdminPassword()">⚙️ 교사용 대시보드</button>
         
         <div class="login-card">
-            <h2>🧪 원소 주기율표 챌린지</h2>
+            <h2>🧪 원소 주기율표 타이핑 챌린지</h2>
             <p>자신의 학번을 입력한 후 도달 테스트에 응시하세요.</p>
             <input type="text" id="student-id" placeholder="학번을 입력하세요 (예: 30512)">
             <button onclick="enterLobby()">입장하기</button>
@@ -124,29 +125,32 @@
             <h3>🎮 챌린지 스테이지 안내</h3>
             <div class="guide-box">
                 <strong>[1] 초기 챌린지 (10문항)</strong><br>
-                화면에 무작위로 등장하는 원소 기호를 보고 올바른 원소 이름을 4지선다형 중에서 빠르게 골라야 합니다.<br><br>
+                화면에 무작위로 등장하는 원소 기호를 보고 올바른 원소 이름을 **정확하게 타이핑(주관식)**해야 합니다.<br><br>
                 <strong>[2] 오답 정복 챌린지 (틀린 문항 재도전)</strong><br>
-                1단계에서 틀렸던 원소들만 완벽히 맞출 때까지 무한 반복 도달 테스트를 수행합니다.
+                1단계에서 틀렸던 원소 기호들을 완전히 마스터하여 맞출 때까지 무한 반복 도달 테스트를 수행합니다.
             </div>
             <button onclick="startChallenge()" style="width:100%; padding:14px; background:var(--accent-green); border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer;">테스트 시작하기</button>
         </div>
     </div>
 
-    <!-- 3. 인게임 플레이 화면 -->
+    <!-- 3. 인게임 플레이 화면 (타이핑/주관식으로 복원) -->
     <div id="game-screen" class="screen">
         <div class="game-card">
             <div class="hud">
                 <span id="stage-indicator">⚡ 초기 챌린지</span>
                 <span id="score-indicator">진행도: 0/10</span>
             </div>
+            <p style="color: var(--text-muted); font-size:14px;">아래 원소 기호의 알맞은 이름을 적으세요.</p>
             <div class="question-display" id="question-text">H</div>
-            <div class="options-grid" id="options-container">
-                <!-- 동적 버튼 생성 영역 -->
+            
+            <div class="input-group">
+                <input type="text" id="typing-answer" class="typing-input" placeholder="정답 입력 (예: 수소)" onkeydown="if(event.key === 'Enter') submitAnswer()">
+                <button class="submit-btn" onclick="submitAnswer()">제출</button>
             </div>
         </div>
     </div>
 
-    <!-- 4. 진로 연계 설문조사 화면 (게임 직후 연계) -->
+    <!-- 4. 진로 연계 설문조사 화면 -->
     <div id="survey-screen" class="screen">
         <div class="game-card">
             <h3>📋 챌린지 완료 및 진로 연계조사</h3>
@@ -162,13 +166,13 @@
             </div>
             <div class="survey-group">
                 <label>Q3. 선택한 원소가 해당 진로/직업에서 어떻게 활용될 수 있을지 아는 대로 적어보세요.</label>
-                <textarea id="sv-reason" placeholder="예: 리튬은 스마트폰이나 전기차 배터리에 핵심 원소로 쓰이므로 컴퓨터 하드웨어나 배터리 제어 시스템 개발과 관련이 깊을 것 같습니다."></textarea>
+                <textarea id="sv-reason" placeholder="예: 리튬은 전기차 배터리에 핵심 원소로 쓰이므로 컴퓨터 하드웨어나 배터리 제어 시스템 개발과 관련이 깊을 것 같습니다."></textarea>
             </div>
             <button onclick="submitAllData()" style="width:100%; padding:14px; background:var(--accent-purple); border:none; border-radius:8px; color:white; font-weight:bold; cursor:pointer;">최종 데이터 제출 및 마치기</button>
         </div>
     </div>
 
-    <!-- 5. [교사 통합 대시보드] 모달 레이아웃 (스크린샷 내용 구현 완료) -->
+    <!-- 5. [교사 통합 대시보드] 모달 레이아웃 -->
     <div id="admin-modal" class="modal-overlay">
         <div class="dashboard-container">
             <div class="dash-header">
@@ -184,7 +188,6 @@
                 <button class="close-btn" onclick="closeAdminDashboard()">&times;</button>
             </div>
 
-            <!-- 데이터 테이블 명세 -->
             <div class="table-wrapper">
                 <table>
                     <thead>
@@ -216,7 +219,6 @@
 
             <!-- 하단 2분할 통합 AI 워크스페이스 -->
             <div class="workspace-grid">
-                <!-- 좌측: AI 초안 생성기 -->
                 <div class="work-card">
                     <div class="dash-title" style="font-size:14px; color:#60a5fa;">🧠 [Step 1] 진로/이력 맞춤 인공지능 세특 빌더</div>
                     <div style="font-size:12px; color:#9ca3af; margin-bottom:10px;">선택 학생: <span id="selected-student-label" style="color:#f43f5e; font-weight:bold;">없음</span></div>
@@ -230,7 +232,6 @@
                     </div>
                 </div>
 
-                <!-- 우측: 수정 및 파이어베이스 영구기록 검토기 -->
                 <div class="work-card" style="border-color: var(--accent-green);">
                     <div class="dash-title" style="font-size:14px; color:#34d399;">👨‍🏫 [Step 2] 교사 최종 검토 및 DB 저장</div>
                     <div style="font-size:12px; color:#9ca3af; margin-bottom:10px;">나이스(NEIS) 입력 전 최종 수정 패널</div>
@@ -241,7 +242,7 @@
         </div>
     </div>
 
-    <!-- 자바스크립트 비즈니스 로직 및 알고리즘 -->
+    <!-- 스크립트 비즈니스 로직 -->
     <script>
         // ==========================================
         // [필수설정] 파이어베이스 연결 정보 입력란
@@ -249,41 +250,33 @@
         const firebaseConfig = {
   apiKey: "AIzaSyB_C2DFIYz_xynj_27CP19zSIq5Nlt_ipY",
   authDomain: "element-master-4b761.firebaseapp.com",
-  databaseURL: "https://element-master-4b761-default-rtdb.firebaseio.com",
   projectId: "element-master-4b761",
   storageBucket: "element-master-4b761.firebasestorage.app",
   messagingSenderId: "429260072990",
   appId: "1:429260072990:web:a4684781e8819d417b660f",
   measurementId: "G-ETZSZR74KS"
 };
-
         
-        // 파이어베이스 초기화
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // 글로벌 변수 셋업
         let currentStudentId = "";
-        let currentStage = 1; // 1: 초기, 2: 오답정복
+        let currentStage = 1; 
         let totalQuestionsAsked = 0;
         let correctAnswersCount = 0;
-        let currentQuestionIndex = 0;
         
         let wrongElementsPool = [];
         let currentTargetElement = null;
 
-        // 학생 세션 내 원본 가동 데이터 저장 객체
         let studentSessionData = {
             initProgress: "0/10", initCorrect: 0, initRate: "0%",
             wrongProgress: "-", wrongCorrect: "-", wrongRate: "-",
             favElement: "", career: "", reason: "", finalFeedback: ""
         };
 
-        // 교사용 글로벌 선택 보관함
         let allRemoteStudentsData = {};
         let selectedStudentIdForEdit = null;
 
-        // 원소 풀 명세 (중학 교육과정 필수 20종 빌드업)
         const elementList = [
             { symbol: 'H', name: '수소' }, { symbol: 'He', name: '헬륨' }, { symbol: 'Li', name: '리튬' },
             { symbol: 'Be', name: '베릴륨' }, { symbol: 'B', name: '붕소' }, { symbol: 'C', name: '탄소' },
@@ -294,7 +287,6 @@
             { symbol: 'K', name: '칼륨' }, { symbol: 'Ca', name: '칼슘' }
         ];
 
-        // 1. 앱 진입 및 화면 전환 컨트롤러
         function enterLobby() {
             const idInput = document.getElementById('student-id').value.trim();
             if(!idInput) { alert("학번을 바르게 입력해주세요."); return; }
@@ -307,7 +299,6 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        // 2. 문제 가동 시스템 및 알고리즘
         function startChallenge() {
             currentStage = 1;
             totalQuestionsAsked = 0;
@@ -318,22 +309,25 @@
         }
 
         function nextQuestion() {
+            // 입력창 초기화 및 포커싱
+            const inputField = document.getElementById('typing-answer');
+            inputField.value = "";
+            inputField.focus();
+
             if (currentStage === 1) {
                 if (totalQuestionsAsked >= 10) {
-                    // Stage 1 종료 -> Stage 2(오답 노트 분석) 분기 설정
                     studentSessionData.initProgress = "10/10";
                     studentSessionData.initCorrect = correctAnswersCount;
                     studentSessionData.initRate = Math.round((correctAnswersCount / 10) * 100) + "%";
                     
                     if (wrongElementsPool.length === 0) {
-                        // 오답이 없으면 즉시 설문조사 패널 이동
                         studentSessionData.wrongProgress = "완벽 통과";
                         studentSessionData.wrongCorrect = 0;
                         studentSessionData.wrongRate = "100%";
                         showScreen('survey-screen');
                     } else {
                         currentStage = 2;
-                        alert(`초기 챌린지가 끝났습니다.\n틀린 원소(${wrongElementsPool.length}개)를 완벽히 숙지할 때까지 오답 정복을 진행합니다.`);
+                        alert(`초기 챌린지가 끝났습니다.\n틀린 원소(${wrongElementsPool.length}개)를 맞출 때까지 오답 정복을 진행합니다.`);
                         totalQuestionsAsked = 0;
                         correctAnswersCount = 0;
                         document.getElementById('stage-indicator').innerText = "🔥 오답 정복 챌린지";
@@ -341,86 +335,63 @@
                     }
                     return;
                 }
-                
-                // 중복 배제 무작위 추출 추출
                 currentTargetElement = elementList[Math.floor(Math.random() * elementList.length)];
             } else {
-                // Stage 2 오답 정복 페이즈
                 if (wrongElementsPool.length === 0) {
                     studentSessionData.wrongProgress = "정복 완료";
                     studentSessionData.wrongRate = "100%";
                     showScreen('survey-screen');
                     return;
                 }
-                currentTargetElement = wrongElementsPool[0]; // 정복할 때까지 맨 앞 항목 재도전
+                currentTargetElement = wrongElementsPool[0]; 
             }
 
             document.getElementById('score-indicator').innerText = 
                 currentStage === 1 ? `진행도: ${totalQuestionsAsked}/10` : `남은 오답: ${wrongElementsPool.length}개`;
             document.getElementById('question-text').innerText = currentTargetElement.symbol;
-            
-            generateOptions(currentTargetElement);
         }
 
-        function generateOptions(correctItem) {
-            const container = document.getElementById('options-container');
-            container.innerHTML = "";
-            
-            let choices = [correctItem.name];
-            while(choices.length < 4) {
-                let randomItem = elementList[Math.floor(Math.random() * elementList.length)].name;
-                if(!choices.includes(randomItem)) choices.push(randomItem);
-            }
-            // 보기 무작위 셔플
-            choices.sort(() => Math.random() - 0.5);
+        // 주관식 타이핑 정답 확인 로직
+        function submitAnswer() {
+            const userAnswer = document.getElementById('typing-answer').value.trim();
+            if(!userAnswer) return;
 
-            choices.forEach(choice => {
-                const btn = document.createElement('button');
-                btn.className = "option-btn";
-                btn.innerText = choice;
-                btn.onclick = () => checkAnswer(choice, correctItem);
-                container.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(chosenName, correctItem) {
             totalQuestionsAsked++;
-            if(chosenName === correctItem.name) {
+            
+            if(userAnswer === currentTargetElement.name) {
                 correctAnswersCount++;
                 if(currentStage === 2) {
-                    wrongElementsPool.shift(); // 맞추면 오답 풀에서 제거
+                    wrongElementsPool.shift(); 
                 }
             } else {
-                if(currentStage === 1 && !wrongElementsPool.includes(correctItem)) {
-                    wrongElementsPool.push(correctItem);
+                if(currentStage === 1 && !wrongElementsPool.includes(currentTargetElement)) {
+                    wrongElementsPool.push(currentTargetElement);
                 }
+                alert(`오답입니다! 정답은 '${currentTargetElement.name}'입니다.`);
             }
             nextQuestion();
         }
 
-        // 3. 설문 작성 및 실시간 파이어베이스 적재 파트
         function submitAllData() {
             studentSessionData.favElement = document.getElementById('sv-element').value.trim();
             studentSessionData.career = document.getElementById('sv-career').value.trim();
             studentSessionData.reason = document.getElementById('sv-reason').value.trim();
 
             if(!studentSessionData.favElement || !studentSessionData.career || !studentSessionData.reason) {
-                alert("학생 정보 분석을 위해 모든 설문 내용을 성실히 적어주세요.");
+                alert("학생 정보 분석을 위해 모든 설문 내용을 적어주세요.");
                 return;
             }
 
-            // 실시간 데이터베이스 영구 바인딩 노드 전송
             database.ref('students/' + currentStudentId).set(studentSessionData)
             .then(() => {
                 alert("성공적으로 데이터가 제출되었습니다. 수고하셨습니다!");
                 location.reload();
             })
             .catch(error => {
-                alert("데이터 전송 오류: " + error.message + "\n[팁] 파이어베이스 Rules 규칙 설정이 true인지 체크하세요.");
+                alert("데이터 전송 오류: " + error.message);
             });
         }
 
-        // 4. [교사용 기능] 암호 검증 시스템 및 대시보드 인터페이스 조작
         function askAdminPassword() {
             const password = prompt("교사용 모드 진입 보안 암호를 입력하세요:");
             if (password === "admin1234") {
@@ -439,7 +410,6 @@
             document.getElementById('admin-modal').classList.remove('active');
         }
 
-        // 파이어베이스에서 리얼타임 데이터 실시간 동기화 호출
         function loadDashboardData() {
             database.ref('students').on('value', (snapshot) => {
                 const data = snapshot.val();
@@ -449,7 +419,7 @@
                 tbody.innerHTML = "";
 
                 if(!data || Object.keys(data).length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="11" style="color:var(--text-muted); padding:30px;">제출된 클라우드 데이터가 없습니다.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="11" style="color:var(--text-muted); padding:30px;">제출된 데이터가 없습니다.</td></tr>`;
                     return;
                 }
 
@@ -481,21 +451,17 @@
 
         function selectStudentRow(studentId, rowElement) {
             selectedStudentIdForEdit = studentId;
-            
             document.querySelectorAll('.clickable-row').forEach(r => r.classList.remove('selected-row'));
             rowElement.classList.add('selected-row');
 
             document.getElementById('selected-student-label').innerText = studentId;
-            
             const currentObj = allRemoteStudentsData[studentId];
             document.getElementById('final-teacher-comment').value = currentObj.finalFeedback || "";
             document.getElementById('ai-output-box').innerText = "원하시는 인공지능 빌더 유형을 클릭하시면 분석 결과가 요약 생성됩니다.";
         }
 
-        // 5. 3가지 버전 AI 맞춤형 요약 세특 빌더 기능 구현
         function generateAIReport(type) {
-            if(!selectedStudentIdForEdit) { alert("대시보드 표에서 대상 학생을 먼저 마우스로 선택해주세요."); return; }
-            
+            if(!selectedStudentIdForEdit) { alert("대시보드 표에서 대상 학생을 선택해주세요."); return; }
             const student = allRemoteStudentsData[selectedStudentIdForEdit];
             let report = "";
 
@@ -508,11 +474,9 @@
             }
 
             document.getElementById('ai-output-box').innerText = "[AI 초안 분석 완료]\n\n" + report;
-            // 오른쪽 편집창으로 자동 복사 배치
             document.getElementById('final-teacher-comment').value = report;
         }
 
-        // 최종 수정한 교사 피드백 데이터베이스 영구 보존
         function saveFinalFeedbackToDB() {
             if(!selectedStudentIdForEdit) { alert("저장할 대상 학생이 선택되지 않았습니다."); return; }
             const txt = document.getElementById('final-teacher-comment').value.trim();
@@ -523,20 +487,15 @@
             });
         }
 
-        // 6. 나이스 연동 엑셀 파일(CSV) 추출 및 한글 깨짐 방지 다운로더
         function downloadCSV() {
             if(Object.keys(allRemoteStudentsData).length === 0) { alert("출력할 데이터가 존재하지 않습니다."); return; }
-            
-            // 한글 깨짐 없는 엑셀 호환을 위해 BOM 문자 적용
             let csvContent = "\uFEFF";
             csvContent += "학번,초기진행도,초기정답수,초기정답률,오답진행도,오답정답수,오답정답률,관심원소,희망직업/진로,과학적근거이유,교사최종확정세특\n";
 
             Object.keys(allRemoteStudentsData).forEach(id => {
                 const st = allRemoteStudentsData[id];
-                // 쉼표 문장 분해 오류 방지 이스케이프 처리
                 let cleanReason = (st.reason || "").replace(/"/g, '""');
                 let cleanFeedback = (st.finalFeedback || "").replace(/"/g, '""');
-
                 csvContent += `${id},${st.initProgress || ''},${st.initCorrect ?? ''},${st.initRate || ''},${st.wrongProgress || ''},${st.wrongCorrect ?? ''},${st.wrongRate || ''},"${st.favElement || ''}","${st.career || ''}","${cleanReason}","${cleanFeedback}"\n`;
             });
 
