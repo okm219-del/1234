@@ -642,7 +642,7 @@
                 html += `<tr><td style="font-weight:bold; color:var(--warning-neon);">${medal}</td><td>${data.studentID}</td><td style="color:var(--primary-neon); font-weight:bold;">${data.initialRate}%</td><td>${data.playTime}초</td></tr>`;
                 rank++;
             });
-            tbody.innerHTML = html || `<tr><td colspan="4" style="text-align:center;">데이터 없음</td></tr>`;
+            tbody.innerHTML = html || `<tr><td colspan="4" style="text-align:center; color:var(--text-gray);">데이터 없음</td></tr>`;
         } catch (e) { console.error(e); }
         if(btn) { btn.innerHTML = `<i class="fa-solid fa-rotate"></i> 새로고침`; btn.disabled = false; }
     };
@@ -709,7 +709,6 @@
         }
     };
 
-    /* 💡 고도화된 스타일별 AI 세특 초안 알고리즘 엔진 (한두 줄 압축 버전) */
     window.generateAICoachDraft = function(style) {
         if(!selectedStudentData) {
             alert("대시보드 표에서 피드백을 작성할 학생의 행을 먼저 선택해 주세요!");
@@ -744,7 +743,7 @@
         if(!finalFeedback.trim()) { alert("내용을 입력하세요."); return; }
 
         try {
-            const docRef = doc(docRef, "student_scores", selectedDocId); // 수정됨
+            // 변수 오타 부분 완전 수정됨
             await updateDoc(doc(db, "student_scores", selectedDocId), { teacherFeedback: finalFeedback });
 
             const toast = document.getElementById("toast-view");
@@ -783,6 +782,9 @@
     };
 
     document.getElementById("answer-input").addEventListener("keydown", e => { if (e.key === "Enter") submitAnswer(); });
+
+    // 페이지 진입 시 미리 랭킹판을 초기화해 둡니다.
+    loadRankingBoard();
 </script>
 </body>
 </html>
