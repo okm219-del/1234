@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>원소 주기율표 마스터 챌린지 + 역량 피드백 시스템 🧪</title>
+    <title>1원소 주기율표 마스터 챌린지 + 역량 피드백 시스템 🧪</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&family=Orbit&family=Share+Tech+Mono&family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
@@ -160,7 +160,7 @@
             margin-top: 25px; background: #161e31; border: 1px solid #334155; padding: 20px; border-radius: 16px;
             display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
         }
-        .ai-box { border-left: 4px solid var(--teacher-purple); background: #1e1b4b; padding: 15px; border-radius: 8px; font-size: 0.9rem; min-height: 140px; }
+        .ai-box { border-left: 4px solid var(--teacher-purple); background: #1e1b4b; padding: 15px; border-radius: 8px; font-size: 0.9rem; min-height: 180px; }
         .editor-box { display: flex; flex-direction: column; gap: 10px; }
         
         .toast { position: fixed; bottom: 30px; right: 30px; background: var(--success-neon); color: #000; padding: 15px 25px; border-radius: 8px; font-weight: bold; z-index: 2000; display: none;}
@@ -174,8 +174,9 @@
         .easy-form { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
         .easy-input { background: #090d16; border: 2px solid #334155; border-radius: 10px; color: white; padding: 10px; font-size: 0.9rem; text-align: left !important; }
 
+        /* 고도화 AI 스타일 패치 */
         .ai-options { display: flex; gap: 8px; margin-top: 8px; }
-        .ai-opt-btn { flex: 1; padding: 8px; font-size: 0.8rem; font-weight: bold; border-radius: 6px; border: 1px solid var(--teacher-purple); background: #2e104a; color: #d8b4fe; cursor: pointer; }
+        .ai-opt-btn { flex: 1; padding: 6px; font-size: 0.75rem; font-weight: bold; border-radius: 6px; border: 1px solid var(--teacher-purple); background: #2e104a; color: #d8b4fe; cursor: pointer; }
         .ai-opt-btn:hover { background: var(--teacher-purple); color: white; }
     </style>
 </head>
@@ -190,12 +191,12 @@
         <p style="color: var(--text-gray); font-size:0.85rem; margin-bottom: 15px;">원소 블라인드 마스터 챌린지 구동을 위해 학번을 등록합니다.</p>
         
         <div class="rule-box">
-            <div class="rule-title"><i class="fa-solid fa-circle-exclamation"></i> 🧪 챌린지 참여 규칙</div>
+            <div class="rule-title"><i class="fa-solid fa-circle-exclamation"></i> 🧪 챌린지 참여 규칙 (필독!)</div>
             <ul class="rule-list">
                 <li>🎯 화면에 나오는 원소 이름을 보고 <strong>원소 기호</strong>를 적으세요.</li>
-                <li>⚠️ 기호를 적을 땐 <strong>첫 글자는 대문자, 둘째 글자는 소문자</strong>를 지켜주세요!</li>
-                <li>🩺 틀린 원소는 나중에 <strong>오답 정복 모드</strong>에서 다시 맞춰 기회를 얻습니다.</li>
-                <li>📝 미션 종료 후 나오는 <strong>3가지 질문</strong>에 성실히 답변해 주세요!</li>
+                <li>⚠️ 기호를 적을 땐 <strong>첫 글자는 대문자, 둘째 글자는 소문자</strong> 규약을 꼭 지켜야 해요!</li>
+                <li>🩺 틀린 원소는 걱정 마세요! 나중에 <strong>오답 정복 모드</strong>에서 다시 맞춰 기회를 얻을 수 있어요.</li>
+                <li>📝 미션이 끝나면 나오는 <strong>3가지 간단한 질문</strong>에 답해야 나이스(생기부) 세특 문장과 멋진 상장이 완성됩니다!</li>
             </ul>
         </div>
 
@@ -256,23 +257,25 @@
     <div class="cert-container" style="max-width: 520px; border-color: var(--primary-neon); text-align: left;">
         <h3 style="color: var(--primary-neon); margin-top:0; text-align: center;"><i class="fa-solid fa-pen-to-square"></i> 🌟 나만의 원소 탐구 3단계 질문</h3>
         <p style="color: var(--text-gray); font-size: 0.8rem; text-align: center; margin-bottom: 20px; line-height: 1.4;">
-            선생님이 생기부(세특)를 작성하실 때 중요한 자료가 됩니다.
+            미션을 성공적으로 마쳤습니다! 아래 질문에 짧고 솔직하게 답해 주세요.<br>선생님이 생기부(세특)를 작성하실 때 아주 중요한 자료가 됩니다.
         </p>
         
         <div class="easy-form">
             <div>
                 <label class="q-label">Q1. 평소에 관심 있는 분야나 나중에 하고 싶은 직업은 무엇인가요?</label>
-                <input type="text" id="q-job" class="easy-input" placeholder="예: 요리사, 의사, 프로머, 운동선수 등">
+                <label class="q-desc">💡 예시: 요리사, 컴퓨터 프로그래머, 의사, 간호사, 운동선수, 예술가, 아직 없음 등</label>
+                <input type="text" id="q-job" class="easy-input" placeholder="여기에 적어주세요.">
             </div>
 
             <div>
-                <label class="q-label">Q2. 오늘 풀어본 원소 중 '가장 기억에 남는 원소'는?</label>
+                <label class="q-label">Q2. 오늘 풀어본 20가지 원소 중 '가장 기억에 남는 원소'는 무엇인가요?</label>
                 <select id="student-fav-element" style="text-align-last: left; font-size:0.9rem; padding:10px;"></select>
             </div>
 
             <div>
-                <label class="q-label">Q3. 왜 그 원소가 가장 기억에 남았나요? (짧게 써보세요!)</label>
-                <textarea id="q-reason" class="easy-input" rows="3" placeholder="예: 반도체를 만드는 규소(Si)가 관심 분야와 연관 있어서 신기했음."></textarea>
+                <label class="q-label">Q3. 왜 그 원소가 가장 기억에 남았나요? (나의 관심사나 직업과 엮어서 짧게 써보세요!)</label>
+                <label class="q-desc">💡 예시: 컴퓨터 프로그래머가 꿈인데 반도체를 만드는 '규소(Si)'가 나와서 신기했다 / 요리사가 꿈인데 소금에 들어있는 '나트륨(Na)'이 기억에 남는다 등</label>
+                <textarea id="q-reason" class="easy-input" rows="3" placeholder="여기에 2~3줄로 자유롭게 적어주세요."></textarea>
             </div>
         </div>
         
@@ -304,12 +307,12 @@
         <div style="font-size:0.85rem; color:var(--text-gray); margin-bottom:15px; display: flex; justify-content: space-between; align-items: center;">
             <div>
                 📝 <b>단원 성취기준:</b> [9과01-03] 원소의 기호를 알고, 원소 주기율표의 특징을 탐구적 관점에서 이해한다.<br>
-                🧬 <b>핵심 평가역량:</b> 과학적 탐구 능력, 비판적 사고력, 진로 융합 역량
+                🧬 <b>핵심 평가역량:</b> 과학적 탐구 능력, 비판적 사고력, 진로 융합 역량 (중2 맞춤형 3단계 질문 연계)
             </div>
             <button class="ctrl-btn" style="background: #10b981; color: white; font-size: 0.85rem; padding: 8px 15px;" onclick="downloadCSV()"><i class="fa-solid fa-file-csv"></i> 생기부 엑셀(CSV) 저장</button>
         </div>
 
-        <p style="color: var(--warning-neon); font-size: 0.85rem; margin: 5px 0;"><i class="fa-solid fa-circle-info"></i> 학생의 행을 클릭하면 하단 워크스페이스에 데이터가 로드됩니다.</p>
+        <p style="color: var(--warning-neon); font-size: 0.85rem; margin: 5px 0;"><i class="fa-solid fa-circle-info"></i> 학생의 행을 클릭하면 하단 워크스페이스에 해당 학생의 데이터와 보고서가 자동으로 로드됩니다.</p>
 
         <div class="table-container">
             <table>
@@ -319,8 +322,8 @@
                         <th colspan="3" style="background-color: #1e294a;">[1] 초기 챌린지</th>
                         <th colspan="3" style="background-color: #3b1825;">[2] 오답 정복</th>
                         <th rowspan="2">기억 남는 원소</th>
-                        <th rowspan="2">Q1. 관심 직업</th>
-                        <th rowspan="2">Q3. 탐구 이유</th>
+                        <th rowspan="2">Q1. 관심 분야/직업</th>
+                        <th rowspan="2">Q3. 원소를 고른 과학적 이유</th>
                         <th rowspan="2" style="background-color: #2e104a;">교사 최종 확정 세특 피드백</th>
                     </tr>
                     <tr>
@@ -332,9 +335,10 @@
             </table>
         </div>
 
+        <!-- 고도화 빌더 레이아웃 수정 -->
         <div class="feedback-workspace">
             <div>
-                <h4 style="margin:0 0 5px 0; color:var(--primary-neon);"><i class="fa-solid fa-brain"></i> [Step 1] 진로/이력 맞춤 인공지능 세특 빌더 (압축 요약형)</h4>
+                <h4 style="margin:0 0 5px 0; color:var(--primary-neon);"><i class="fa-solid fa-brain"></i> [Step 1] 진로/이력 맞춤 인공지능 세특 빌더</h4>
                 <div style="font-size: 0.8rem; color:var(--text-gray); margin-bottom: 8px;">선택 학생: <span id="selected-student-id-display" style="color:var(--success-neon); font-weight:bold;">없음</span></div>
                 
                 <div class="ai-options">
@@ -343,14 +347,14 @@
                     <button class="ai-opt-btn" onclick="generateAICoachDraft('growth')">📈 성장 노력형 빌드</button>
                 </div>
 
-                <div class="ai-box" id="ai-draft-box" style="margin-top:10px; max-height:160px; overflow-y:auto; line-height:1.5; font-size:0.85rem; color:#e2e8f0; padding:12px;">
-                    표에서 학생을 선택한 뒤 스타일 버튼을 누르면 한두 줄 세특이 즉시 설계됩니다.
+                <div class="ai-box" id="ai-draft-box" style="margin-top:10px; max-height:220px; overflow-y:auto; line-height:1.5; font-size:0.85rem; color:#e2e8f0; padding:12px;">
+                    표에서 학생을 클릭한 뒤 원하시는 세특 스타일 버튼을 선택하세요. 데이터 기반 맞춤 정밀 문장이 실시간 설계됩니다.
                 </div>
             </div>
             
             <div class="editor-box">
                 <h4 style="margin:0 0 10px 0; color:var(--success-neon);"><i class="fa-solid fa-user-pen"></i> [Step 2] 교사 최종 확정 및 DB 저장</h4>
-                <textarea id="teacher-edit-area" rows="6" placeholder="AI 초안을 다듬어 나이스(NEIS)에 입력할 문장을 편집하세요."></textarea>
+                <textarea id="teacher-edit-area" rows="8" placeholder="AI 초안을 다듬어 나이스(NEIS)에 바로 넣을 최종 문장으로 편집하세요. 저장 시 파이어베이스에 영구 기록됩니다."></textarea>
                 <button class="ctrl-btn purple" style="font-size:0.9rem; padding:12px;" onclick="saveFeedbackToFirebase()"><i class="fa-solid fa-cloud-arrow-up"></i> 최종 세특 피드백 DB 영구 저장</button>
             </div>
         </div>
@@ -397,15 +401,13 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // 유저 제공 정식 Firebase 설정값 연동
     const firebaseConfig = {
-        apiKey: "AIzaSyB_C2DFIYz_xynj_27CP19zSIq5Nlt_ipY",
-        authDomain: "element-master-4b761.firebaseapp.com",
-        projectId: "element-master-4b761",
-        storageBucket: "element-master-4b761.firebasestorage.app",
-        messagingSenderId: "429260072990",
-        appId: "1:429260072990:web:a4684781e8819d417b660f",
-        measurementId: "G-ETZSZR74KS"
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -582,7 +584,7 @@
         const reasonVal = document.getElementById("q-reason").value.trim();
 
         if(!jobVal || !reasonVal) {
-            alert("질문에 대한 답변을 모두 채워주세요!");
+            alert("질문에 대한 답변을 모두 채워주세요! 세특 기록에 정말 큰 도움이 됩니다. 😊");
             return;
         }
 
@@ -705,11 +707,11 @@
             selectedStudentData = target.data;
             document.getElementById("selected-student-id-display").innerText = `${selectedStudentData.studentID}`;
             document.getElementById("teacher-edit-area").value = selectedStudentData.teacherFeedback || "";
-            document.getElementById("ai-draft-box").innerHTML = "<span style='color:var(--primary-neon);'>상단의 3가지 AI 빌드 버튼 중 하나를 클릭하면 압축 세특이 생성됩니다.</span>";
+            document.getElementById("ai-draft-box").innerHTML = "<span style='color:var(--primary-neon);'>상단의 3가지 AI 빌드 버튼 중 하나를 클릭하면 정밀 분석 문장이 생성됩니다.</span>";
         }
     };
 
-    /* 💡 고도화된 스타일별 AI 세특 초안 알고리즘 엔진 (한두 줄 압축 버전) */
+    /* 💡 고도화된 스타일별 AI 세특 초안 알고리즘 엔진 */
     window.generateAICoachDraft = function(style) {
         if(!selectedStudentData) {
             alert("대시보드 표에서 피드백을 작성할 학생의 행을 먼저 선택해 주세요!");
@@ -719,19 +721,23 @@
         const st = selectedStudentData;
         let draft = "";
         
+        // 데이터 전처리
         const rate = st.initialRate;
         const job = st.studentJob || "미지정 분야";
         const element = st.favElement || "주요 원소";
         const reason = st.studentReason || "원소의 성질에 관심이 많음";
+        const errorText = st.caseErrors > 0 ? 
+            `초기 기호 표기법에서 대소문자 규약 오차가 있었으나 과학 데이터의 표준 규약 준수 필요성을 재인식하고 오답 정복 과정을 통해 철저히 자정하여 교정하는 정밀함을 발휘함.` : 
+            `학습 전 과정에서 원소 기호 표기의 대소문자 규약을 엄격하게 준수하여 과학적 약속을 오차 없이 이행하는 뛰어난 성실성과 섬세함을 입증함.`;
 
         if (style === 'competency') {
-            draft = `주기율표 챌린지에서 정답률 ${rate}%를 기록하며 원소의 주기적 성질을 구조적으로 파악하는 역량이 뛰어나며, 높은 집중력으로 미션을 완수함.`;
+            draft = `[역량 중심형 평가]\n'원소 주기율표 마스터 블라인드 챌린지'에서 뛰어난 몰입도를 바탕으로 초기 정답률 ${rate}%를 기록하며 원소의 주기적 성질[9과01-03]을 구조적으로 파악하는 역량을 증명함. ${errorText} 수많은 원소 정보 속에서 규칙성을 비판적으로 분석하는 탐구 능력이 돋보이며, 최고 콤보수 ${st.maxCombo}회를 달성할 정도로 높은 집중력과 과학적 기억 체계의 우수성을 나타냄. 학습 과제를 끈기 있게 완수하는 자기주도적 문제해결 역량이 매우 돋보이는 학생임.`;
         } 
         else if (style === 'convergence') {
-            draft = `자신의 진로인 '${job}' 분야와 연계하여 '${element}'에 관심을 두고, "${reason}"과 같이 원소의 특성을 진로 맥락과 결합하여 논리적으로 설명함.`;
+            draft = `[진로 융합형 평가]\n원소의 기호와 특징을 규명하는 과정에서 자신의 진로적 관심사 및 관심 분야인 '${job}' 맥락과 연계하여 깊이 있게 탐구함. 특히 탐구 대상 원소로 '${element}'를 주도적으로 선정하고, "${reason}"과 같이 원소의 화학적·물리적 특성을 실생활 및 해당 직업군의 유용성과 논리적으로 결합하여 설명해 냄. 단순 암기를 넘어 교과 지식을 자신의 진로와 융합하여 해석하는 융합적 사고력과 지식 확장 역량이 매우 독창적임.`;
         } 
         else if (style === 'growth') {
-            draft = `초기 오답 요인을 분석하기 위해 '오답 정복 모드'에 적극 참여하여 취약점을 보완하는 등 성취기준에 도달하기 위해 노력하는 집요함이 돋보임.`;
+            draft = `[성장 노력형 평가]\n'원소 주기성 이해 및 탐구[9과01-03]' 미션 수행 과정에서 원소 명칭과 매칭되는 기호를 체계화하려는 진취적인 노력을 보임. ${errorText} 초기 학습의 공백이나 오답 요인을 분석하기 위해 '오답 정복 모드'에 적극 참여하여 취약 부분을 메우며 메타인지적 피드백을 실천함. 총 ${st.playTime}초간 포기하지 않고 지식을 교정하여 끝내 성취기준에 도달해 내는 인내심을 보여주었으며, 향후 지속적인 지적 성장이 크게 기대됨.`;
         }
 
         document.getElementById("ai-draft-box").innerText = draft;
@@ -744,8 +750,8 @@
         if(!finalFeedback.trim()) { alert("내용을 입력하세요."); return; }
 
         try {
-            const docRef = doc(docRef, "student_scores", selectedDocId); // 수정됨
-            await updateDoc(doc(db, "student_scores", selectedDocId), { teacherFeedback: finalFeedback });
+            const docRef = doc(db, "student_scores", selectedDocId);
+            await updateDoc(docRef, { teacherFeedback: finalFeedback });
 
             const toast = document.getElementById("toast-view");
             toast.innerText = `💾 [${selectedStudentData.studentID}] 학생의 세특 피드백이 파이어베이스 DB에 영구 저장되었습니다!`;
