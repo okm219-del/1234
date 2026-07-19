@@ -630,7 +630,7 @@
         const btn = document.getElementById("refresh-rank-btn");
         if(btn) { btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; btn.disabled = true; }
         try {
-            const q = query(collection(db, "student_scores"), orderBy("initialRate", "desc"), orderBy("playTime", "asc"), limit(5));
+            const q = query(collection(db, "student_scores"), orderBy("initialRate", "desc"), limit(5));
             const querySnapshot = await getDocs(q);
             const tbody = document.getElementById("ranking-table-body");
             let html = ""; let rank = 1;
