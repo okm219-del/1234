@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,9 +42,28 @@
         .start-card {
             background: linear-gradient(145deg, #121826, #1a243c);
             border: 2px solid var(--primary-neon); border-radius: 24px;
-            padding: 40px; text-align: center; max-width: 450px; width: 90%;
+            padding: 35px; text-align: center; max-width: 480px; width: 92%;
             box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            max-height: 95vh; overflow-y: auto;
         }
+
+        .rule-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .rule-title {
+            font-size: 0.95rem; font-weight: bold; color: var(--warning-neon);
+            margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+        }
+        .rule-list {
+            margin: 0; padding-left: 20px; font-size: 0.85rem; color: #cbd5e1;
+            line-height: 1.6;
+        }
+        .rule-list li strong { color: var(--primary-neon); }
 
         .game-wrapper {
             max-width: 950px; width: 100%;
@@ -91,13 +109,14 @@
         .hint-pill { background: #1e293b; padding: 6px 12px; border-radius: 12px; font-size: 0.85rem; color: var(--primary-neon); border: 1px solid rgba(0, 240, 255, 0.2); }
 
         .input-wrapper { display: flex; gap: 12px; width: 100%; max-width: 320px; margin: 0 auto;}
-        input[type="text"], input[type="password"], textarea {
+        input[type="text"], input[type="password"], textarea, select {
             background: #090d16; border: 2px solid #334155; border-radius: 12px;
             color: var(--text-light); padding: 10px; width: 100%; text-align: center;
         }
         input[type="text"] { font-family: 'Share Tech Mono', monospace; font-size: 1.8rem; }
         textarea { text-align: left; font-size: 0.95rem; resize: none; line-height: 1.5; }
-        input:focus, textarea:focus { outline: none; border-color: var(--primary-neon); box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
+        select { font-size: 1rem; color: var(--primary-neon); cursor: pointer; text-align-last: center; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-neon); box-shadow: 0 0 15px rgba(0, 240, 255, 0.3); }
 
         .submit-btn, .ctrl-btn {
             background: linear-gradient(135deg, var(--primary-neon), #00a8ff);
@@ -126,44 +145,69 @@
         .progress-fill { height: 100%; width: 5%; background: linear-gradient(90deg, var(--primary-neon), var(--success-neon)); border-radius: 6px; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 6, 12, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
-        .cert-container, .teacher-modal-content { background: #111827; border: 4px solid #ffd700; border-radius: 30px; padding: 40px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 0 40px rgba(255, 215, 0, 0.3); }
+        .cert-container, .teacher-modal-content { background: #111827; border: 4px solid #ffd700; border-radius: 30px; padding: 35px; max-width: 550px; width: 90%; text-align: center; box-shadow: 0 0 40px rgba(255, 215, 0, 0.3); }
         
-        .teacher-modal-content { max-width: 1050px; border-color: var(--teacher-purple); text-align: left; position: relative; max-height: 90vh; overflow-y: auto;}
+        .teacher-modal-content { max-width: 1200px; border-color: var(--teacher-purple); text-align: left; position: relative; max-height: 90vh; overflow-y: auto;}
         .close-modal-btn { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--text-gray); font-size: 1.5rem; cursor: pointer; }
 
         .table-container { width: 100%; overflow-x: auto; background: rgba(10, 14, 23, 0.4); border-radius: 14px; border: 1px solid #334155; margin-top: 15px;}
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; color: var(--text-light);}
-        th, td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); }
-        th { background-color: #1e293b; color: var(--text-gray); }
+        th, td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+        th { background-color: #1e293b; color: var(--text-gray); text-align: center; }
+        td.wrap-text { white-space: normal; max-width: 250px; font-size: 0.8rem; color: var(--text-gray); }
 
         .feedback-workspace {
             margin-top: 25px; background: #161e31; border: 1px solid #334155; padding: 20px; border-radius: 16px;
             display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
         }
-        .ai-box { border-left: 4px solid var(--teacher-purple); background: #1e1b4b; padding: 15px; border-radius: 8px; font-size: 0.9rem; }
+        .ai-box { border-left: 4px solid var(--teacher-purple); background: #1e1b4b; padding: 15px; border-radius: 8px; font-size: 0.9rem; min-height: 140px; }
         .editor-box { display: flex; flex-direction: column; gap: 10px; }
         
         .toast { position: fixed; bottom: 30px; right: 30px; background: var(--success-neon); color: #000; padding: 15px 25px; border-radius: 8px; font-weight: bold; z-index: 2000; display: none;}
         .shake { animation: shake 0.3s ease-in-out; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-10px); } 40%, 80% { transform: translateX(10px); } }
+        
+        .selected-row { background-color: rgba(139, 92, 246, 0.15) !important; border: 2px solid var(--teacher-purple) !important; }
+        
+        .q-label { text-align: left; font-size: 0.9rem; font-weight: bold; color: #e2e8f0; margin-bottom: 4px; display: block;}
+        .q-desc { text-align: left; font-size: 0.75rem; color: var(--text-gray); margin-bottom: 8px; display: block;}
+        .easy-form { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; }
+        .easy-input { background: #090d16; border: 2px solid #334155; border-radius: 10px; color: white; padding: 10px; font-size: 0.9rem; text-align: left !important; }
+
+        .ai-options { display: flex; gap: 8px; margin-top: 8px; }
+        .ai-opt-btn { flex: 1; padding: 8px; font-size: 0.8rem; font-weight: bold; border-radius: 6px; border: 1px solid var(--teacher-purple); background: #2e104a; color: #d8b4fe; cursor: pointer; }
+        .ai-opt-btn:hover { background: var(--teacher-purple); color: white; }
     </style>
 </head>
 <body>
 
 <canvas id="effect-canvas"></canvas>
 
+<!-- 학번 입력 및 게임 규칙 스크린 -->
 <div class="start-wrapper" id="start-screen">
     <div class="start-card">
-        <h2 style="color: var(--primary-neon); margin-top:0;"><i class="fa-solid fa-graduation-cap"></i> 학생 세션 등록</h2>
-        <p style="color: var(--text-gray); font-size:0.9rem; margin-bottom: 25px;">원소 블라인드 마스터 챌린지 구동을 위해 학번을 등록합니다.</p>
+        <h2 style="color: var(--primary-neon); margin-top:0;"><i class="fa-solid fa-graduation-cap"></i> 챌린지 대기실</h2>
+        <p style="color: var(--text-gray); font-size:0.85rem; margin-bottom: 15px;">원소 블라인드 마스터 챌린지 구동을 위해 학번을 등록합니다.</p>
+        
+        <div class="rule-box">
+            <div class="rule-title"><i class="fa-solid fa-circle-exclamation"></i> 🧪 챌린지 참여 규칙</div>
+            <ul class="rule-list">
+                <li>🎯 화면에 나오는 원소 이름을 보고 <strong>원소 기호</strong>를 적으세요.</li>
+                <li>⚠️ 기호를 적을 땐 <strong>첫 글자는 대문자, 둘째 글자는 소문자</strong>를 지켜주세요!</li>
+                <li>🩺 틀린 원소는 나중에 <strong>오답 정복 모드</strong>에서 다시 맞춰 기회를 얻습니다.</li>
+                <li>📝 미션 종료 후 나오는 <strong>3가지 질문</strong>에 성실히 답변해 주세요!</li>
+            </ul>
+        </div>
+
         <div class="input-wrapper" style="flex-direction: column; gap:15px;">
-            <input type="text" id="student-id-input" placeholder="예: 30101" maxlength="5">
-            <button class="submit-btn" onclick="startGame()" style="padding:15px; width:100%;">챌린지 무대 입장</button>
+            <input type="text" id="student-id-input" placeholder="예: 20101" maxlength="5">
+            <button class="submit-btn" onclick="startGame()" style="padding:15px; width:100%;">규칙을 확인했습니다. 입장하기 🚀</button>
         </div>
         <p id="start-error-msg" style="color: var(--secondary-neon); font-size:0.85rem; margin-top:10px;"></p>
     </div>
 </div>
 
+<!-- 메인 게임 보드 -->
 <div class="game-wrapper">
     <div class="game-header">
         <div class="title-area">
@@ -207,8 +251,38 @@
     </div>
 </div>
 
+<!-- 3단계 세부 질문 폼 모달 -->
+<div class="modal" id="report-modal">
+    <div class="cert-container" style="max-width: 520px; border-color: var(--primary-neon); text-align: left;">
+        <h3 style="color: var(--primary-neon); margin-top:0; text-align: center;"><i class="fa-solid fa-pen-to-square"></i> 🌟 나만의 원소 탐구 3단계 질문</h3>
+        <p style="color: var(--text-gray); font-size: 0.8rem; text-align: center; margin-bottom: 20px; line-height: 1.4;">
+            선생님이 생기부(세특)를 작성하실 때 중요한 자료가 됩니다.
+        </p>
+        
+        <div class="easy-form">
+            <div>
+                <label class="q-label">Q1. 평소에 관심 있는 분야나 나중에 하고 싶은 직업은 무엇인가요?</label>
+                <input type="text" id="q-job" class="easy-input" placeholder="예: 요리사, 의사, 프로머, 운동선수 등">
+            </div>
+
+            <div>
+                <label class="q-label">Q2. 오늘 풀어본 원소 중 '가장 기억에 남는 원소'는?</label>
+                <select id="student-fav-element" style="text-align-last: left; font-size:0.9rem; padding:10px;"></select>
+            </div>
+
+            <div>
+                <label class="q-label">Q3. 왜 그 원소가 가장 기억에 남았나요? (짧게 써보세요!)</label>
+                <textarea id="q-reason" class="easy-input" rows="3" placeholder="예: 반도체를 만드는 규소(Si)가 관심 분야와 연관 있어서 신기했음."></textarea>
+            </div>
+        </div>
+        
+        <button class="submit-btn" onclick="submitStudentReport()" style="padding: 14px; width: 100%;">답변 제출하고 상장 확인하기 🏅</button>
+    </div>
+</div>
+
+<!-- 관리자 패스워드 모달 -->
 <div class="modal" id="teacher-auth-modal">
-    <div class="cert-container" style="border-color: var(--teacher-purple);">
+    <div class="cert-container" style="border-color: var(--teacher-purple); text-align:center;">
         <h3 style="color: var(--teacher-purple); margin-top:0;"><i class="fa-solid fa-key"></i> 관리자 잠금 해제</h3>
         <div class="input-wrapper" style="flex-direction: column; gap:12px;">
             <input type="password" id="teacher-pw" placeholder="비밀번호(admin1234) 입력">
@@ -221,31 +295,37 @@
     </div>
 </div>
 
+<!-- 교사용 대시보드 및 피드백 워크스페이스 -->
 <div class="modal" id="teacher-dashboard-modal">
     <div class="teacher-modal-content">
         <button class="close-modal-btn" onclick="closeDashboardModal()"><i class="fa-solid fa-xmark"></i></button>
-        <h2 style="color: var(--teacher-purple); margin-top:0;"><i class="fa-solid fa-chalkboard-user"></i> 교사용 통합 대시보드 & 피드백 워크스페이스</h2>
+        <h2 style="color: var(--teacher-purple); margin-top:0;"><i class="fa-solid fa-chalkboard-user"></i> 교사용 통합 대시보드 & 생기부 아카이브</h2>
         
         <div style="font-size:0.85rem; color:var(--text-gray); margin-bottom:15px; display: flex; justify-content: space-between; align-items: center;">
             <div>
                 📝 <b>단원 성취기준:</b> [9과01-03] 원소의 기호를 알고, 원소 주기율표의 특징을 탐구적 관점에서 이해한다.<br>
-                🧬 <b>핵심 평가역량:</b> 과학적 탐구 능력, 비판적 사고력
+                🧬 <b>핵심 평가역량:</b> 과학적 탐구 능력, 비판적 사고력, 진로 융합 역량
             </div>
-            <button class="ctrl-btn" style="background: #10b981; color: white; font-size: 0.85rem; padding: 8px 15px;" onclick="downloadCSV()"><i class="fa-solid fa-file-csv"></i> CSV 저장</button>
+            <button class="ctrl-btn" style="background: #10b981; color: white; font-size: 0.85rem; padding: 8px 15px;" onclick="downloadCSV()"><i class="fa-solid fa-file-csv"></i> 생기부 엑셀(CSV) 저장</button>
         </div>
+
+        <p style="color: var(--warning-neon); font-size: 0.85rem; margin: 5px 0;"><i class="fa-solid fa-circle-info"></i> 학생의 행을 클릭하면 하단 워크스페이스에 데이터가 로드됩니다.</p>
 
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th rowspan="2" style="text-align: center;">학번</th>
-                        <th colspan="3" style="text-align: center; background-color: #1e294a;">[1] 초기 챌린지</th>
-                        <th colspan="3" style="text-align: center; background-color: #3b1825;">[2] 오답 정복 챌린지</th>
-                        <th rowspan="2" style="text-align: center;">최대 콤보</th>
+                        <th rowspan="2">학번</th>
+                        <th colspan="3" style="background-color: #1e294a;">[1] 초기 챌린지</th>
+                        <th colspan="3" style="background-color: #3b1825;">[2] 오답 정복</th>
+                        <th rowspan="2">기억 남는 원소</th>
+                        <th rowspan="2">Q1. 관심 직업</th>
+                        <th rowspan="2">Q3. 탐구 이유</th>
+                        <th rowspan="2" style="background-color: #2e104a;">교사 최종 확정 세특 피드백</th>
                     </tr>
                     <tr>
                         <th>진행도</th><th>정답수</th><th>정답률</th>
-                        <th>진행도</th><th>정답수</th><th>정답률(공식)</th>
+                        <th>진행도</th><th>정답수</th><th>정답률</th>
                     </tr>
                 </thead>
                 <tbody id="student-table-body"></tbody>
@@ -254,28 +334,38 @@
 
         <div class="feedback-workspace">
             <div>
-                <h4 style="margin:0 0 10px 0; color:var(--primary-neon);"><i class="fa-solid fa-brain"></i> [Step 1] AI 실시간 초안 작성</h4>
-                <button class="ctrl-btn" style="width:100%; margin-bottom:10px; font-size:0.85rem; padding:8px;" onclick="generateAICoachDraft()">현재 이력 기반 AI 초안 추출</button>
-                <div class="ai-box" id="ai-draft-box">학생의 도전 이력이 쌓이면 AI가 성취기준 기반 분석 초안을 여기에 실시간 빌드합니다.</div>
+                <h4 style="margin:0 0 5px 0; color:var(--primary-neon);"><i class="fa-solid fa-brain"></i> [Step 1] 진로/이력 맞춤 인공지능 세특 빌더 (압축 요약형)</h4>
+                <div style="font-size: 0.8rem; color:var(--text-gray); margin-bottom: 8px;">선택 학생: <span id="selected-student-id-display" style="color:var(--success-neon); font-weight:bold;">없음</span></div>
+                
+                <div class="ai-options">
+                    <button class="ai-opt-btn" onclick="generateAICoachDraft('competency')">🎯 역량 중심형 빌드</button>
+                    <button class="ai-opt-btn" onclick="generateAICoachDraft('convergence')">🧬 진로 융합형 빌드</button>
+                    <button class="ai-opt-btn" onclick="generateAICoachDraft('growth')">📈 성장 노력형 빌드</button>
+                </div>
+
+                <div class="ai-box" id="ai-draft-box" style="margin-top:10px; max-height:160px; overflow-y:auto; line-height:1.5; font-size:0.85rem; color:#e2e8f0; padding:12px;">
+                    표에서 학생을 선택한 뒤 스타일 버튼을 누르면 한두 줄 세특이 즉시 설계됩니다.
+                </div>
             </div>
             
             <div class="editor-box">
-                <h4 style="margin:0 0 10px 0; color:var(--success-neon);"><i class="fa-solid fa-user-pen"></i> [Step 2] 교사 최종 검토 및 전송</h4>
-                <textarea id="teacher-edit-area" rows="6" placeholder="AI 초안을 전송하거나 이곳에서 수정하여 최종 교육 코멘트를 작성하세요."></textarea>
-                <button class="ctrl-btn purple" style="font-size:0.9rem; padding:10px;" onclick="commitFeedbackToStudent()"><i class="fa-solid fa-paper-plane"></i> 검토 완료 및 학생에게 전송</button>
+                <h4 style="margin:0 0 10px 0; color:var(--success-neon);"><i class="fa-solid fa-user-pen"></i> [Step 2] 교사 최종 확정 및 DB 저장</h4>
+                <textarea id="teacher-edit-area" rows="6" placeholder="AI 초안을 다듬어 나이스(NEIS)에 입력할 문장을 편집하세요."></textarea>
+                <button class="ctrl-btn purple" style="font-size:0.9rem; padding:12px;" onclick="saveFeedbackToFirebase()"><i class="fa-solid fa-cloud-arrow-up"></i> 최종 세특 피드백 DB 영구 저장</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- 최종 결과 및 실시간 상장 모달 -->
 <div class="modal" id="result-modal">
-    <div class="cert-container" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+    <div class="cert-container" style="max-width: 600px; max-height: 90vh; overflow-y: auto; text-align: center;">
         <div style="font-size: 3rem; color:#ffd700; margin-bottom:10px;"><i class="fa-solid fa-award"></i></div>
         <h2 style="color: #ffd700; margin-top: 0;">주기율표 정복 상장</h2>
         <p style="font-size:0.9rem; color:var(--text-light)">위 학생(<span id="cert-student-id" style="color:var(--primary-neon); font-weight:bold;"></span>)은 성취기준 도달 미션을 완료하였습니다.</p>
         
         <div id="student-view-feedback-box" style="background:#0f172a; border:1px solid #334155; border-radius:12px; padding:15px; margin:20px 0; text-align:left; font-size:0.85rem; color:#e2e8f0; min-height:60px; max-height: 150px; overflow-y:auto;">
-            <i class="fa-solid fa-message" style="color:var(--primary-neon)"></i> 담당 교사의 피드백을 기다리는 중입니다...
+            <i class="fa-solid fa-message" style="color:var(--primary-neon)"></i> 담당 교사의 피드백이 등록되면 실시간 대시보드 및 상장에 반영됩니다.
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0 5px 0;">
@@ -302,26 +392,25 @@
 
 <div class="toast" id="toast-view"></div>
 
-<!-- 🔥 파이어베이스 핵심 라이브러리 탑재 -->
+<!-- 파이어베이스 모듈 스크립트 -->
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    // 💡 2단계에서 발급받을 파이어베이스 키 값을 여기에 붙여넣을 예정입니다!
+    // 유저 제공 정식 Firebase 설정값 연동
     const firebaseConfig = {
-  apiKey: "AIzaSyB_C2DFIYz_xynj_27CP19zSIq5Nlt_ipY",
-  authDomain: "element-master-4b761.firebaseapp.com",
-  projectId: "element-master-4b761",
-  storageBucket: "element-master-4b761.firebasestorage.app",
-  messagingSenderId: "429260072990",
-  appId: "1:429260072990:web:a4684781e8819d417b660f",
-  measurementId: "G-ETZSZR74KS"
-};
+        apiKey: "AIzaSyB_C2DFIYz_xynj_27CP19zSIq5Nlt_ipY",
+        authDomain: "element-master-4b761.firebaseapp.com",
+        projectId: "element-master-4b761",
+        storageBucket: "element-master-4b761.firebasestorage.app",
+        messagingSenderId: "429260072990",
+        appId: "1:429260072990:web:a4684781e8819d417b660f",
+        measurementId: "G-ETZSZR74KS"
+    };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // --- 이하 오리지널 게임 시스템 데이터 및 로직 ---
     const elementDataset = [
         { num: 1, symbol: "H", name: "수소", group: 1, period: 1, gridCol: 1, gridRow: 1 },
         { num: 2, symbol: "He", name: "헬륨", group: 18, period: 1, gridCol: 18, gridRow: 1 },
@@ -362,6 +451,18 @@
     let startTime = null;
     let totalPlayTime = 0;
 
+    let currentFirebaseDocs = [];
+    let selectedDocId = null;
+    let selectedStudentData = null;
+
+    const selectEl = document.getElementById("student-fav-element");
+    elementDataset.forEach(e => {
+        let opt = document.createElement("option");
+        opt.value = `${e.name}(${e.symbol})`;
+        opt.innerText = `${e.num}번. ${e.name} (${e.symbol})`;
+        selectEl.appendChild(opt);
+    });
+
     window.startGame = function() {
         const idInput = document.getElementById("student-id-input").value.trim();
         if(idInput.length !== 5 || isNaN(idInput)) {
@@ -397,7 +498,7 @@
     function loadNextQuiz() {
         if (!isClinicMode) {
             if (currentIndex >= quizSet.length) {
-                if (Math.round((initialSuccessCount / 20) * 100) >= 80) triggerFinish();
+                if (Math.round((initialSuccessCount / 20) * 100) >= 80) triggerReportInput();
                 else startClinicMode();
                 return;
             }
@@ -407,7 +508,7 @@
         } else {
             if (currentIndex >= clinicQuizPool.length) {
                 if (Math.round(((initialSuccessCount + clinicSuccessCount) / 20) * 100) >= 80) {
-                    triggerFinish();
+                    triggerReportInput();
                     return;
                 } else {
                     clinicQuizPool = (nextClinicPool.length > 0) ? [...nextClinicPool].sort(() => Math.random() - 0.5) : [...originalWrongAnswers];
@@ -459,7 +560,7 @@
             combo = 0; document.getElementById("combo-display").classList.remove("active");
             if (!isClinicMode) { if(!originalWrongAnswers.some(e=>e.num===currentElement.num)) originalWrongAnswers.push(currentElement); }
             else { if(!nextClinicPool.some(e=>e.num===currentElement.num)) nextClinicPool.push(currentElement); }
-            if (input.toLowerCase() === currentElement.symbol.toLowerCase()) { caseSensitiveErrors++; document.getElementById("feedback").innerHTML = `<span style="color:#ff007f">⚠ 대소문자 위반!</span>`; }
+            if (input.toLowerCase() === currentElement.symbol.toLowerCase()) { caseSensitiveErrors++; document.getElementById("feedback").innerHTML = `<span style="color:#ff007f">⚠️ 대소문자 위반!</span>`; }
             else { document.getElementById("feedback").innerHTML = `<span style="color:#ff007f">❌ 오답 (정답: ${currentElement.symbol})</span>`; }
             currentIndex++; setTimeout(loadNextQuiz, 600);
         }
@@ -470,12 +571,21 @@
         document.getElementById("accuracy-rate").innerText = `${rate}% ${isClinicMode ? '(누적)' : ''}`;
     }
 
-    // 🔥 파이어베이스 반양: 데이터 저장 장치 개조
-    async function triggerFinish() {
+    function triggerReportInput() {
         totalPlayTime = Math.round((new Date() - startTime) / 1000);
-        document.getElementById("cert-student-id").innerText = studentID;
-        document.getElementById("result-modal").style.display = "flex";
-        
+        document.getElementById("report-modal").style.display = "flex";
+    }
+
+    window.submitStudentReport = async function() {
+        const jobVal = document.getElementById("q-job").value.trim();
+        const favEl = document.getElementById("student-fav-element").value;
+        const reasonVal = document.getElementById("q-reason").value.trim();
+
+        if(!jobVal || !reasonVal) {
+            alert("질문에 대한 답변을 모두 채워주세요!");
+            return;
+        }
+
         const payload = {
             studentID: studentID,
             initialProgress: !isClinicMode ? currentIndex : 20,
@@ -486,60 +596,57 @@
             clinicRate: isClinicMode ? Math.round(((initialSuccessCount + clinicSuccessCount) / 20) * 100) : 0,
             maxCombo: maxCombo,
             playTime: totalPlayTime,
+            caseErrors: caseSensitiveErrors,
             wrongAnswers: originalWrongAnswers.map(e => e.name).join(","),
+            favElement: favEl,
+            studentJob: jobVal,
+            studentReason: reasonVal,
+            teacherFeedback: "", 
             timestamp: new Date()
         };
 
         try {
-            // Firestore의 'student_scores' 함에 보관 데이터 추가
-            await addDoc(collection(db, "student_scores"), payload);
+            document.getElementById("report-modal").style.display = "none";
+            document.getElementById("cert-student-id").innerText = studentID;
+            document.getElementById("result-modal").style.display = "flex";
+
+            const docRef = await addDoc(collection(db, "student_scores"), payload);
+            
+            onSnapshot(doc(db, "student_scores", docRef.id), (docSnap) => {
+                if (docSnap.exists() && docSnap.data().teacherFeedback) {
+                    document.getElementById("student-view-feedback-box").innerHTML = `
+                        <i class="fa-solid fa-square-check" style="color:var(--success-neon)"></i> <b>교사 최종 승인 세특 피드백:</b><br>${docSnap.data().teacherFeedback.replace(/\n/g, '<br>')}
+                    `;
+                }
+            });
+
             loadRankingBoard();
         } catch (e) {
-            console.error("데이터 저장 실패:", e);
+            console.error("Firebase 데이터 저장 실패:", e);
         }
-    }
+    };
 
-    // 🔥 파이어베이스 반영: 실시간 초고속 랭킹 보드 가져오기
     window.loadRankingBoard = async function() {
         const btn = document.getElementById("refresh-rank-btn");
-        if(btn) { btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> 갱신중...`; btn.disabled = true; }
-
+        if(btn) { btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i>`; btn.disabled = true; }
         try {
-            // 초기 정답률이 높은 순, 그다음 플레이 시간이 짧은 순으로 정렬해서 상위 5개 가져오기
             const q = query(collection(db, "student_scores"), orderBy("initialRate", "desc"), orderBy("playTime", "asc"), limit(5));
             const querySnapshot = await getDocs(q);
-            
             const tbody = document.getElementById("ranking-table-body");
-            let html = "";
-            let rank = 1;
+            let html = ""; let rank = 1;
 
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
                 let medal = rank + "등";
-                if(rank===1) medal = "🥇 1등";
-                if(rank===2) medal = "🥈 2등";
-                if(rank===3) medal = "🥉 3등";
-                
-                html += `
-                    <tr>
-                        <td style="font-weight:bold; color: var(--warning-neon);">${medal}</td>
-                        <td>${data.studentID}</td>
-                        <td style="color: var(--primary-neon); font-weight:bold;">${data.initialRate}%</td>
-                        <td>${data.playTime}초</td>
-                    </tr>
-                `;
+                if(rank===1) medal = "🥇 1등"; if(rank===2) medal = "🥈 2등"; if(rank===3) medal = "🥉 3등";
+                html += `<tr><td style="font-weight:bold; color:var(--warning-neon);">${medal}</td><td>${data.studentID}</td><td style="color:var(--primary-neon); font-weight:bold;">${data.initialRate}%</td><td>${data.playTime}초</td></tr>`;
                 rank++;
             });
-
-            tbody.innerHTML = html || `<tr><td colspan="4" style="text-align:center; color:var(--text-gray);">데이터가 없습니다.</td></tr>`;
-        } catch (e) {
-            console.error("랭킹 가져오기 실패:", e);
-        } finally {
-            if(btn) { btn.innerHTML = `<i class="fa-solid fa-rotate"></i> 새로고침`; btn.disabled = false; }
-        }
+            tbody.innerHTML = html || `<tr><td colspan="4" style="text-align:center;">데이터 없음</td></tr>`;
+        } catch (e) { console.error(e); }
+        if(btn) { btn.innerHTML = `<i class="fa-solid fa-rotate"></i> 새로고침`; btn.disabled = false; }
     };
 
-    /* 교사용 대시보드 로직 */
     window.openAuthModal = function() { document.getElementById("teacher-auth-modal").style.display = "flex"; document.getElementById("teacher-pw").focus(); };
     window.closeAuthModal = function() { document.getElementById("teacher-auth-modal").style.display = "none"; };
     window.closeDashboardModal = function() { document.getElementById("teacher-dashboard-modal").style.display = "none"; };
@@ -547,9 +654,7 @@
     window.verifyPassword = function() {
         if(document.getElementById("teacher-pw").value === SECRET_PW) {
             closeAuthModal(); document.getElementById("teacher-dashboard-modal").style.display = "flex"; refreshTeacherTable();
-        } else {
-            document.getElementById("auth-fail-msg").innerText = "비밀번호 오류.";
-        }
+        } else { document.getElementById("auth-fail-msg").innerText = "비밀번호 오류."; }
     };
 
     async function refreshTeacherTable() {
@@ -558,88 +663,123 @@
             const querySnapshot = await getDocs(q);
             const tbody = document.getElementById("student-table-body");
             let html = "";
+            
+            currentFirebaseDocs = [];
 
             querySnapshot.forEach((doc) => {
+                const docId = doc.id;
                 const st = doc.data();
+                currentFirebaseDocs.push({ id: docId, data: st });
+
+                const fbColor = st.teacherFeedback ? "var(--success-neon)" : "var(--text-gray)";
+                const fbText = st.teacherFeedback ? st.teacherFeedback : "미작성 (클릭하여 작성)";
+
                 html += `
-                    <tr>
+                    <tr id="row-${docId}" onclick="window.selectStudentRow('${docId}')" style="cursor:pointer;">
                         <td style="color:var(--primary-neon); font-weight:bold; text-align:center;">${st.studentID}</td>
-                        <td>${st.initialProgress === 20 ? '완료' : st.initialProgress + '/20'}</td>
-                        <td>${st.initialSuccessCount}개</td>
-                        <td>${st.initialRate}%</td>
-                        <td>${st.clinicProgress > 0 ? '완료(' + st.clinicProgress + '개)' : '미진입'}</td>
-                        <td>${st.clinicProgress > 0 ? st.clinicSuccessCount + '개' : '-'}</td>
-                        <td>${st.clinicProgress > 0 ? st.clinicRate + '%' : '-'}</td>
-                        <td style="color:var(--secondary-neon); font-weight:bold; text-align:center;">${st.maxCombo}</td>
+                        <td style="text-align:center;">${st.initialProgress === 20 ? '완료' : st.initialProgress + '/20'}</td>
+                        <td style="text-align:center;">${st.initialSuccessCount}개</td>
+                        <td style="text-align:center; font-weight:bold;">${st.initialRate}%</td>
+                        <td style="text-align:center;">${st.clinicProgress > 0 ? '완료' : '미진입'}</td>
+                        <td style="text-align:center;">${st.clinicProgress > 0 ? st.clinicSuccessCount + '개' : '-'}</td>
+                        <td style="text-align:center;">${st.clinicProgress > 0 ? st.clinicRate + '%' : '-'}</td>
+                        <td style="color:var(--warning-neon); text-align:center;">${st.favElement || '-'}</td>
+                        <td class="wrap-text" style="color: #cbd5e1;">${st.studentJob || '-'}</td>
+                        <td class="wrap-text">${st.studentReason || '-'}</td>
+                        <td class="wrap-text" style="color:${fbColor}; font-style:italic;">${fbText}</td>
                     </tr>
                 `;
             });
-            tbody.innerHTML = html || `<tr><td colspan="8" style="text-align:center; color:var(--text-gray);">제출된 데이터가 없습니다.</td></tr>`;
-        } catch (e) {
-            console.error("대시보드 조회 실패:", e);
-        }
+            tbody.innerHTML = html || `<tr><td colspan="11" style="text-align:center; color:var(--text-gray);">제출된 데이터가 없습니다.</td></tr>`;
+        } catch (e) { console.error("대시보드 로드 실패:", e); }
     }
 
-    window.downloadCSV = async function() {
-        try {
-            const querySnapshot = await getDocs(collection(db, "student_scores"));
-            if(querySnapshot.empty) { alert("다운로드할 데이터가 없습니다."); return; }
-            
-            let csvContent = "\uFEFF학번,초기진행도,초기정답수,초기정답률(%),오답진행도,오답정답수,오답정답률(%),최대콤보,오답문항\n";
-            querySnapshot.forEach((doc) => {
-                const st = doc.data();
-                csvContent += `${st.studentID},${st.initialProgress},${st.initialSuccessCount},${st.initialRate},${st.clinicProgress},${st.clinicSuccessCount},${st.clinicRate},${st.maxCombo},"${st.wrongAnswers}"\n`;
-            });
-            
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.setAttribute("download", `원소마스터_게임결과_${new Date().toISOString().slice(0,10)}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } catch (e) {
-            alert("CSV 생성에 실패했습니다.");
+    window.selectStudentRow = function(docId) {
+        document.querySelectorAll("#student-table-body tr").forEach(tr => tr.classList.remove("selected-row"));
+        const row = document.getElementById(`row-${docId}`);
+        if(row) row.classList.add("selected-row");
+
+        const target = currentFirebaseDocs.find(item => item.id === docId);
+        if(target) {
+            selectedDocId = docId;
+            selectedStudentData = target.data;
+            document.getElementById("selected-student-id-display").innerText = `${selectedStudentData.studentID}`;
+            document.getElementById("teacher-edit-area").value = selectedStudentData.teacherFeedback || "";
+            document.getElementById("ai-draft-box").innerHTML = "<span style='color:var(--primary-neon);'>상단의 3가지 AI 빌드 버튼 중 하나를 클릭하면 압축 세특이 생성됩니다.</span>";
         }
     };
 
-    window.generateAICoachDraft = function() {
-        const initRate = Math.round((initialSuccessCount / 20) * 100);
-        const accumRate = Math.round(((initialSuccessCount + clinicSuccessCount) / 20) * 100);
-        
-        let draft = `🤖 [AI 초안 분석 레포트]\n`;
-        draft += `본 학생은 주기율표 성취기준[9과01-03] 도달 테스트에서 초기 정답률 ${initRate}%를 기록했습니다.\n`;
-        
-        if (isClinicMode) {
-            draft += `이후 오답 클리닉을 활성화하여 오답 규칙을 집중 분석 중이며, 현재 누적 성취도는 ${accumRate}%입니다.\n`;
-            if (accumRate >= 80) draft += `✔ [역량 평가] 오답 교정 능력을 통해 '과학적 탐구 능력' 하위의 문제 해결 스킬이 우수하게 보완됨을 증명했습니다.\n`;
-        } else {
-            if (initRate >= 80) draft += `✔ [역량 평가] 원소 기호 인지 직관성과 주기성 구조 메커니즘을 마스터하여 '과학적 탐구 능력' 최우수 등급에 부합합니다.\n`;
+    /* 💡 고도화된 스타일별 AI 세특 초안 알고리즘 엔진 (한두 줄 압축 버전) */
+    window.generateAICoachDraft = function(style) {
+        if(!selectedStudentData) {
+            alert("대시보드 표에서 피드백을 작성할 학생의 행을 먼저 선택해 주세요!");
+            return;
         }
+
+        const st = selectedStudentData;
+        let draft = "";
         
-        if (caseSensitiveErrors > 0) {
-            draft += `⚠ [주의 요망] 기호 대소문자 서식 규약 오류가 ${caseSensitiveErrors}회 검출되었으므로 과학적 약속에 대한 정밀한 태도 훈련 보완이 필요합니다.`;
-        } else if (originalWrongAnswers.length > 0) {
-            draft += `🎯 [오답 취약점] 주로 이탈한 원소군 [${originalWrongAnswers.map(e=>e.name).slice(0,3).join(", ")}]에 대한 원소 기호화 개념 재복습이 필요합니다.`;
+        const rate = st.initialRate;
+        const job = st.studentJob || "미지정 분야";
+        const element = st.favElement || "주요 원소";
+        const reason = st.studentReason || "원소의 성질에 관심이 많음";
+
+        if (style === 'competency') {
+            draft = `주기율표 챌린지에서 정답률 ${rate}%를 기록하며 원소의 주기적 성질을 구조적으로 파악하는 역량이 뛰어나며, 높은 집중력으로 미션을 완수함.`;
+        } 
+        else if (style === 'convergence') {
+            draft = `자신의 진로인 '${job}' 분야와 연계하여 '${element}'에 관심을 두고, "${reason}"과 같이 원소의 특성을 진로 맥락과 결합하여 논리적으로 설명함.`;
+        } 
+        else if (style === 'growth') {
+            draft = `초기 오답 요인을 분석하기 위해 '오답 정복 모드'에 적극 참여하여 취약점을 보완하는 등 성취기준에 도달하기 위해 노력하는 집요함이 돋보임.`;
         }
 
         document.getElementById("ai-draft-box").innerText = draft;
         document.getElementById("teacher-edit-area").value = draft;
     };
 
-    window.commitFeedbackToStudent = function() {
-        const finalText = document.getElementById("teacher-edit-area").value;
-        if(!finalText.trim()) { alert("피드백 내용을 작성해 주세요."); return; }
-        
-        document.getElementById("student-view-feedback-box").innerHTML = `
-            <i class="fa-solid fa-square-check" style="color:var(--success-neon)"></i> <b>교사 최종 승인 피드백:</b><br>${finalText.replace(/\n/g, '<br>')}
-        `;
-        
-        const toast = document.getElementById("toast-view");
-        toast.innerText = `🚀 학생에게 성취기준 역량 피드백이 전송되었습니다!`;
-        toast.style.display = "block";
-        setTimeout(() => toast.style.display = "none", 3000);
-        closeDashboardModal();
+    window.saveFeedbackToFirebase = async function() {
+        if(!selectedDocId) { alert("피드백을 저장할 학생이 선택되지 않았습니다."); return; }
+        const finalFeedback = document.getElementById("teacher-edit-area").value;
+        if(!finalFeedback.trim()) { alert("내용을 입력하세요."); return; }
+
+        try {
+            const docRef = doc(docRef, "student_scores", selectedDocId); // 수정됨
+            await updateDoc(doc(db, "student_scores", selectedDocId), { teacherFeedback: finalFeedback });
+
+            const toast = document.getElementById("toast-view");
+            toast.innerText = `💾 [${selectedStudentData.studentID}] 학생의 세특 피드백이 파이어베이스 DB에 영구 저장되었습니다!`;
+            toast.style.display = "block";
+            setTimeout(() => toast.style.display = "none", 3000);
+
+            refreshTeacherTable();
+        } catch(e) {
+            alert("DB 저장 오류가 발생했습니다."); console.error(e);
+        }
+    };
+
+    window.downloadCSV = async function() {
+        try {
+            const querySnapshot = await getDocs(collection(db, "student_scores"));
+            if(querySnapshot.empty) { alert("다운로드할 데이터가 없습니다."); return; }
+            
+            let csvContent = "\uFEFF학번,초기정답률(%),오답정답률(%),대소문자오류,최대콤보,플레이시간,선택최애원소,학생관심직업,학생작성이유,교사최종세특피드백\n";
+            querySnapshot.forEach((doc) => {
+                const st = doc.data();
+                const cleanJob = (st.studentJob || "").replace(/,/g, " ").replace(/\n/g, " ");
+                const cleanReason = (st.studentReason || "").replace(/,/g, " ").replace(/\n/g, " ");
+                const cleanFeedback = (st.teacherFeedback || "").replace(/,/g, " ").replace(/\n/g, " ");
+                csvContent += `${st.studentID},${st.initialRate},${st.clinicRate},${st.caseErrors},${st.maxCombo},${st.playTime}초,${st.favElement || ''},"${cleanJob}","${cleanReason}","${cleanFeedback}"\n`;
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `주기율표_중2_세특연계_결과_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (e) { alert("CSV 다운로드 실패"); }
     };
 
     document.getElementById("answer-input").addEventListener("keydown", e => { if (e.key === "Enter") submitAnswer(); });
